@@ -35,8 +35,9 @@ def main():
     dictionary = Dictionary(file_name)
     
     print("**************Example to test search implementation **************")
-    start_word = "lurk"
-    end_word = "hide"
+    #Feel free to add two words below for testing
+    start_word = "glass"
+    end_word = "clank"
     search_instance = Search(start_word, end_word, dictionary)
 
     #BFS Execution
