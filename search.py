@@ -7,7 +7,7 @@ class Search:
     """
         Implements search algorithms for word transformations.
     """
-    def __init__(self, start_word="", end_word=""):
+    def __init__(self, start_word="", end_word="", dictionary=None):
         """
         Initializes the Search object with start and end words.
 
@@ -17,6 +17,7 @@ class Search:
         """    
         self.start_word = start_word
         self.end_word = end_word
+        self.dictionary = dictionary if dictionary else Dictionary()
         self.nodes_expanded = 0 #To track the number of nodes expanded
 
     def bfs(self):
@@ -36,14 +37,16 @@ class Search:
             self.nodes_expanded += 1 #Increment nodes expanded
 
             #If we have reached the end word, return the current node
-            if current_node.word == self.end_word:
+            if current_node.value == self.end_word:
                 return current_node
             
             #Generate valid neighbors by changing one letter at a time
-            for neighbor in self.get_neighbors(current_node.word):
+            for neighbor in self.get_neighbors(current_node.value):
                 if neighbor not in visited:
                     visited.add(neighbor) #Mark this word as visited
-                    queue.append(Node(neighbor, current_node)) #Add neighbor to the queue
+                    neighbor_node = Node(neighbor)
+                    neighbor_node.set_parent(current_node)
+                    queue.append(neighbor_node) 
         return None #If no path is found
 
     def dfs(self):
@@ -63,14 +66,16 @@ class Search:
             self.nodes_expanded += 1 #Increment nodes expanded
 
             #If we have reached the end word, return the current node
-            if current_node.word == self.end_word:
+            if current_node.value == self.end_word:
                 return current_node
             
             #Generate valid neighbors by changing one letter at a time
-            for neighbor in self.get_neighbors(current_node.word):
+            for neighbor in self.get_neighbors(current_node.value):
                 if neighbor not in visited:
                     visited.add(neighbor) #Mark this word as visited
-                    stack.append(Node,(neighbor, current_node)) #Add neighbor to the stack
+                    neighbor_node = Node(neighbor)
+                    neighbor_node.set_parent(current_node)
+                    stack.append(neighbor_node) 
         return None #If no path is found
     
     def get_neighbors(self, word):
@@ -89,7 +94,7 @@ class Search:
                 #Only replace the character if it's different
                 if word[i] != letter:
                     neighbor = word[:i] + letter + word[i+1:]
-                    if Dictionary.is_valid_word(neighbor): #Check if it's a valid word
+                    if self.dictionary.search_word(neighbor): #Check if it is a valid word
                         neighbors.append(neighbor)
         return neighbors
     
