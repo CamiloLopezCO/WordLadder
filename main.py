@@ -36,8 +36,8 @@ def main():
     
     print("**************Example to test search implementation **************")
     #Add two words below for testing
-    start_word = "buffer"
-    end_word = "copter"
+    start_word = "drivers"
+    end_word = "nearest"
     search_instance = Search(start_word, end_word, dictionary)
 
     #BFS Execution
