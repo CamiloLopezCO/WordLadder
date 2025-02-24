@@ -45,6 +45,7 @@ def main():
     if bfs_goal:
         print("BFS Path Found:")
         print_path(bfs_goal)
+        print(f"Path Length (BFS): {get_path_length(bfs_goal)}")
         print(f"Nodes Expanded (BFS): {search_instance.nodes_expanded}")
     else:
         print("No path found using BFS.")
@@ -56,6 +57,7 @@ def main():
     if dfs_goal:
         print("DFS Path Found:")
         print_path(dfs_goal)
+        print(f"Path Length (DFS): {get_path_length(dfs_goal)}")
         print(f"Nodes Expanded (DFS): {search_instance.nodes_expanded}")
     else:
         print("No path found using DFS.")
