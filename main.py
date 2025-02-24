@@ -13,6 +13,22 @@ def print_path(goal_node):
         goal_node = goal_node.get_parent()
     print("-> ".join(reversed(path)))
 
+def get_path_length(goal_node):
+    """
+    Computes the number of transformations (edges) in the path.
+
+    Args:
+        goal_node (Node): This final node in the search path. 
+
+    Returns:
+        int: The path length (number of edges).
+    """
+    length = 0
+    while goal_node.get_parent():
+        length += 1
+        goal_node = goal_node.get_parent()
+    return length
+
 def main():
     print("**************Dictionary usage example**************")
     file_name = "words.txt"
